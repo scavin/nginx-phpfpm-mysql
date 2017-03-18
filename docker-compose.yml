@@ -1,0 +1,23 @@
+nginx-php-fpm:
+  image: richarvey/nginx-php-fpm
+  ports: 
+    - "80:80"
+  volumes: 
+    - ./www:/var/www/html
+    - ./nginxconf:/etc/nginx/sites-available/
+  links:
+    - wordpressdb:mysql
+
+phpmyadmin:
+  image: corbinu/docker-phpmyadmin
+  ports:
+    - "8080:80"
+  links:
+    - wordpressdb:mysql
+
+wordpressdb:
+  image: mariadb
+  volumes: 
+    - ./mysql:/var/lib/mysql
+  environment:
+    MYSQL_ROOT_PASSWORD: Cef##NdjFX#MS
